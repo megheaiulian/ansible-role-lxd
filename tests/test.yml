@@ -1,7 +1,7 @@
 ---
 
-- hosts: localhost
-  become: True
+- hosts: all
+  become: true
   roles:
     - role: plumelo.lxd
       lxd_packages: ['lxd']
