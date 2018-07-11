@@ -1,9 +1,7 @@
 ---
 
-lxd_packages:
-  - lxd
-  - lxd-client
-  - zfsutils-linux
+lxd_default_url: unix:/var/snap/lxd/common/lxd/unix.socket
+
 lxd_users: []
 
 lxd_init: true
