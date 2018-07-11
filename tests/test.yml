@@ -5,24 +5,34 @@
   roles:
     - role: plumelo.lxd
       lxd_packages: ['lxd']
-      lxd_users: ['travis']
+      lxd_users: ['ubuntu']
       lxd_dns_ipv4: '10.229.31.1'
       lxd_prepend_dns: ['{{ lxd_dns_ipv4 }}']
       lxd_default_bridge_ipv4_address: '{{ lxd_dns_ipv4 }}/24'
       lxd_default_pool_driver: dir
       lxd_default_pool_config: {}
       cloud_config:
+        package_upgrade: true
         manage_etc_hosts: true
+        hostname: xenial
         packages:
           - python
           - acl
           - sudo
+      lxd_user_data: "#cloud-config\n{{ cloud_config|to_yaml(indent=2) }}"
       lxd_containers:
         - name: xenial
-          state: started
-          become_user: travis
           alias: 'x'
           config:
-            user.user-data: "#cloud-config\n{{ cloud_config|combine({'hostname': 'xenial'})|to_yaml(indent=2) }}"
+            security.nesting: 'true'
+            security.privileged: 'true'
+            user.user-data: "{{lxd_user_data}}"
           devices: {}
           timeout: 600
+
+# lxc_config:
+#   security.nesting=true
+#   security.privileged=true
+#   raw.lxc: |-
+#     lxc.apparmor.profile=unconfined
+#     lxc.cgroup.devices.allow=a
