@@ -1,14 +1,18 @@
 ---
 
-- name: Install LXD with snap
-  shell: snap install lxd
-
-- name: Install LXD
+- name: Ensure there is no  lxd installed from repo
   apt:
     name: '{{ item }}'
-    state: latest
-    default_release: xenial-backports
-  with_items: '{{ lxd_packages }}'
+  with_items:
+    - lxd
+    - lxd-client
+
+- name: Install LXD with snap
+  shell: snap install {{ item }}
+  with_items:
+    - lxd --channel=3.0
+    - lxd
+  changed_when: false
 
 - name: Add users to lxd group
   user:
