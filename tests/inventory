@@ -1,2 +1,2 @@
 # localhost ansible_connection=local
-lxc ansible_host=10.180.70.12 ansible_ssh_user=user
+lxc ansible_host=10.180.70.93
