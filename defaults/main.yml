@@ -47,4 +47,4 @@ lxd_config:
 # Add DNS servers to dhcp
 lxd_prepend_dns: []
 
-lxd_containters: []
+lxd_containers: []
