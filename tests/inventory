@@ -1,2 +1,2 @@
 # localhost ansible_connection=local
-lxc ansible_host=10.180.70.93
+lxc ansible_host=10.79.112.112

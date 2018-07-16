@@ -4,7 +4,6 @@
   become: true
   roles:
     - role: plumelo.lxd
-      lxd_packages: ['lxd']
       lxd_users: ['ubuntu']
       lxd_dns_ipv4: '10.229.31.1'
       lxd_prepend_dns: ['{{ lxd_dns_ipv4 }}']
