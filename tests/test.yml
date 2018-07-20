@@ -4,7 +4,8 @@
   become: true
   roles:
     - role: plumelo.lxd
-      lxd_users: ['ubuntu']
+      lxd_install: false
+      lxd_users: ['travis']
       lxd_dns_ipv4: '10.229.31.1'
       lxd_prepend_dns: ['{{ lxd_dns_ipv4 }}']
       lxd_default_bridge_ipv4_address: '{{ lxd_dns_ipv4 }}/24'
@@ -21,6 +22,8 @@
       lxd_user_data: "#cloud-config\n{{ cloud_config|to_yaml(indent=2) }}"
       lxd_containers:
         - name: xenial
+          state: started
+          become_user: travis
           alias: 'x'
           config:
             security.nesting: 'true'

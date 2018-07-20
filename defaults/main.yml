@@ -1,5 +1,7 @@
 ---
 
+lxd_install: true
+
 lxd_default_url: unix:/var/snap/lxd/common/lxd/unix.socket
 
 lxd_users: []

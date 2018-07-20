@@ -3,16 +3,15 @@
 - name: Ensure there is no  lxd installed from repo
   apt:
     name: '{{ item }}'
+    state: absent
   with_items:
     - lxd
     - lxd-client
 
-- name: Install LXD with snap
-  shell: snap install {{ item }}
-  with_items:
-    - lxd --channel=3.0
-    - lxd
-  changed_when: false
+- name: Create lxd group
+  group:
+    name: lxd
+    state: present
 
 - name: Add users to lxd group
   user:
@@ -21,3 +20,10 @@
     append: true
   with_items: '{{ lxd_users }}'
   register: lxd_group_users_status
+
+- name: Install LXD with snap
+  shell: snap install {{ item }}
+  with_items:
+    - lxd --channel=3.0
+  when: lxd_install == "true"
+  changed_when: false

@@ -1,2 +1,2 @@
-# localhost ansible_connection=local
-lxc ansible_host=10.79.112.112
+localhost ansible_connection=local
+# lxc-test ansible_connection=lxd ansible_python_interpreter='/usr/bin/python3'
